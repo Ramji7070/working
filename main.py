@@ -1183,8 +1183,19 @@ async def txt_handler(bot: Client, m: Message):
                 url = f"https://dragoapi.vercel.app/pdf/{url}"
             
             elif 'encrypted.m' in url:
-                appxkey = url.split('*')[1]
-                url = url.split('*')[0]
+                 appxkey = url.split('*')[1]
+                 url = url.split('*')[0]
+
+    # New condition to handle query string and domain replacement
+                 if '?' in url:
+        # Remove query string
+                  url = url.split('?')[0]
+
+        # Replace domain
+                  url = url.replace("https://static-trans-v2.appx.co.in/videos/akstechnicalclasses-", 
+                          "https://appx-transcoded-videos-mcdn.akamai.net.in/videos/akstechnicalclasses-")
+
+    # Final URL reconstruction
 
             if "youtu" in url:
                 ytf = f"bv*[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[height<=?{raw_text2}]"
@@ -1561,9 +1572,20 @@ async def text_handler(bot: Client, m: Message):
                 url = f"https://dragoapi.vercel.app/pdf/{url}"
             
             elif 'encrypted.m' in url:
-                appxkey = url.split('*')[1]
-                url = url.split('*')[0]
+                 appxkey = url.split('*')[1]
+                 url = url.split('*')[0]
 
+    # New condition to handle query string and domain replacement
+                 if '?' in url:
+        # Remove query string
+                  url = url.split('?')[0]
+
+        # Replace domain
+                  url = url.replace("https://static-trans-v2.appx.co.in/videos/akstechnicalclasses-", 
+                          "https://appx-transcoded-videos-mcdn.akamai.net.in/videos/akstechnicalclasses-")
+
+    # Final URL reconstruction
+                 url = f"{url}*{appxkey}"
             if "youtu" in url:
                 ytf = f"bv*[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[height<=?{raw_text2}]"
             elif "embed" in url:
